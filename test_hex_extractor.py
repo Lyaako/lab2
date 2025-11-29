@@ -41,13 +41,13 @@ class TestHexColorExtractor(unittest.TestCase):
     @patch("hex_extractor.requests.get")
     def test_get_colors_from_url_success(self, mock_get):
         mock_response = Mock()
-        mock_response.text = "Цвет фона: #FF5733, акцент: #A1B"
+        mock_response.text = "Цвет фона: #FF5733, акцент: #A1BB"
         mock_response.raise_for_status = Mock()
         mock_get.return_value = mock_response
 
         result = self.extractor.get_colors_from_url("http://example.com")
         expected = ["#FF5733"]
-        self.assertEqual(result, expected)  # '#A1B' не соответствует шаблону (длина 4)
+        self.assertEqual(result, expected)  # '#A1BB' не соответствует шаблону (длина 4)
 
     @patch("hex_extractor.requests.get")
     def test_get_colors_from_url_error(self, mock_get):
